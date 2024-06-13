@@ -50,10 +50,15 @@ public class BoardController {
     }
     @GetMapping("/{id}")
     public String findById(@PathVariable Long id, Model model,
-                           @PageableDefault(page=1) Pageable pageable){
+                           @PageableDefault(page=1) Pageable pageable,
+                           Principal principal){
         //해당 게시글의 조회수를 하나 올리고 게시글 데이터를 가져와서 출력
         boardService.updateHits(id);
         BoardDTO boardDTO = boardService.findById(id);
+        //댓글 작성자 가져오기//
+        String memberEmail = principal.getName();
+        String comment = memberService.findMemberNameByMemberEmail(memberEmail);
+        model.addAttribute("commentWriter", comment);
         //댓글목록 가져오기//
         List<CommentDTO> commentDTOList = commentService.findAll(id);
         model.addAttribute("commentList",commentDTOList);

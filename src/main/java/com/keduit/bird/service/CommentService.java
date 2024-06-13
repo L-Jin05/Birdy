@@ -17,13 +17,15 @@ import java.util.Optional;
 public class CommentService {
     private final CommentRepository commentRepository;
     private final BoardRepository boardRepository;
+    private final BoardService boardService;
 
     public Long save(CommentDTO commentDTO) {
         /* 부모엔티티(BoardEntity) 조회 */
         Optional<BoardEntity> optionalBoardEntity = boardRepository.findById(commentDTO.getBoardId());
         if (optionalBoardEntity.isPresent()) {
+            String memberName = boardService.getMemberNameFromAuthentication();
             BoardEntity boardEntity = optionalBoardEntity.get();
-            CommentEntity commentEntity = CommentEntity.toSaveEntity(commentDTO, boardEntity);
+            CommentEntity commentEntity = CommentEntity.toSaveEntity(commentDTO, boardEntity, memberName);
             return commentRepository.save(commentEntity).getId();
         } else {
             return null;

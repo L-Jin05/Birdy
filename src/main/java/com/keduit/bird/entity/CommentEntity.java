@@ -30,9 +30,10 @@ public class CommentEntity extends BaseEntity {
     private BoardEntity boardEntity;
 
 
-    public static CommentEntity toSaveEntity(CommentDTO commentDTO, BoardEntity boardEntity) {
+    public static CommentEntity toSaveEntity(CommentDTO commentDTO, BoardEntity boardEntity, String memberName) {
         CommentEntity commentEntity = new CommentEntity();
-        commentEntity.setCommentWriter(commentDTO.getCommentWriter());
+        //작성자를 사용자이름으로.
+        commentEntity.setCommentWriter(memberName);
         commentEntity.setCommentContents(commentDTO.getCommentContents());
         commentEntity.setBoardEntity(boardEntity);
         return commentEntity;

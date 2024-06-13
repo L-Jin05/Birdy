@@ -22,8 +22,16 @@ public class CommentDTO {
         commentDTO.setId(commentEntity.getId());
         commentDTO.setCommentWriter(commentEntity.getCommentWriter());
         commentDTO.setCommentContents(commentEntity.getCommentContents());
-//        commentDTO.setCommentCreatedTime(commentEntity.getCommentCreatedTime());
+        commentDTO.setCommentCreatedTime(commentEntity.getBoardCreatedTime());
         commentDTO.setBoardId(boardId);
+        return commentDTO;
+    }
+    public static CommentDTO getCommentDTO(CommentEntity commentEntity) {
+        CommentDTO commentDTO = new CommentDTO();
+        commentDTO.setId(commentEntity.getId());
+        commentDTO.setCommentWriter(commentEntity.getCommentWriter());
+        commentDTO.setCommentContents(commentEntity.getCommentContents());
+        commentDTO.setCommentCreatedTime(commentEntity.getBoardCreatedTime());
         return commentDTO;
     }
 }

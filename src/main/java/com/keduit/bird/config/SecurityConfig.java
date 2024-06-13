@@ -43,13 +43,13 @@ public class SecurityConfig{
 
         http.authorizeRequests()
                 // 특정 경로에 대한 접근 권한을 설정
-                .mvcMatchers("/", "/members/**","/bird/**", "/images/**", "/intro/**", "favicon.ico", "error", "/member/**")
+                .mvcMatchers("/", "/members/**", "/images/**", "/intro/**", "favicon.ico", "error", "/member/**")
                 // 접근 가능한 경로를 지정
                 .permitAll()
                 // 앞서 작성한 경로는 누구나 접근 가능하도록 All 설정
-                .mvcMatchers("/bird/**", "/member/**", "/myPage/**", "/", "/board/**", "/intro/**")
+                .mvcMatchers("/bird/**", "/member/**", "/myPage/**", "/comment/**", "/board/**", "/intro/**")
                 .hasAnyRole("MEMBER","ADMIN")
-                .mvcMatchers("/admin/**", "/member/**")
+                .mvcMatchers("/admin/**")
                 // "/admin/**" 경로에 대한 권한 설정
                 .hasRole("ADMIN")
                 // "ADMIN" 권한을 가진 사용자의 접근일 경우 가능하며,
@@ -61,7 +61,7 @@ public class SecurityConfig{
                 .and()
                 .csrf()
 //                .disable();
-                .ignoringAntMatchers("/members/**", "/myPage/memberStop", "/myPage/update","/board/save","/admin/**");
+                .ignoringAntMatchers("/members/**", "/myPage/memberStop", "/myPage/update","/board/**", "/comment/**","/admin/**");
         //"/mrmbers/**"경로에 대해서만 csrf 토큰 보호 off시킴.
 //                .disable();
         //403 오류....짜증...보안 꺼버리기 <- 최후의 수단...

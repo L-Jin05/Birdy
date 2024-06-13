@@ -31,7 +31,8 @@ public class BoardDTO {
     private int fileAttached; //파일 첨부 여부(첨부 1, 미첨부 0)
 
 
-    public BoardDTO(Long id, String adminBoardId, String boardTitle,  int boardHits, LocalDateTime boardCreatedTime) {
+    public BoardDTO(Long id, String adminBoardId, String boardTitle,
+                    int boardHits, LocalDateTime boardCreatedTime) {
         this.id = id;
         this.adminBoardId = adminBoardId;
         this.boardTitle = boardTitle;
